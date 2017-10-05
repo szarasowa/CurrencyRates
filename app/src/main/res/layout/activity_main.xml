@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context="ovh.szarasowa.currencyrates.MainActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:id="@+id/container_layout"
         android:layout_width="match_parent"
@@ -25,28 +19,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:paddingLeft="16dp"
-            android:paddingRight="8dp">
+            android:paddingEnd="8dp"
+            android:paddingStart="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Source"
+                android:layout_alignParentEnd="true"
+                android:text="@string/source"
                 android:textStyle="italic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BITBAY.NET"
+                android:text="@string/bitbay_net"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:layout_weight="4"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -57,7 +51,7 @@
 
                 <TextView
                     style="@style/PairName"
-                    android:text="BTC/PLN" />
+                    android:text="@string/btc_pln" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,17 +60,11 @@
 
                     <TextView
                         style="@style/ValueType"
-                        android:text="max:" />
+                        android:text="@string/max" />
 
                     <TextView
                         android:id="@+id/btc_max_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.8"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="18sp" />
+                        style="@style/MinorPrice" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -86,49 +74,73 @@
 
                     <TextView
                         style="@style/ValueType"
-                        android:text="min:" />
+                        android:text="@string/min" />
 
                     <TextView
                         android:id="@+id/btc_min_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.8"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="18sp" />
+                        style="@style/MinorPrice" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="fill_vertical"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/ValueType"
-                        android:text="average:" />
+                        android:text="@string/last" />
 
                     <TextView
                         android:id="@+id/btc_last_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.9"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="48sp" />
+                        style="@style/MainPrice"  />
                 </LinearLayout>
 
+                <TextView
+                    style="@style/PairName"
+                    android:text="@string/eth_pln" />
 
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    />
+                    <TextView
+                        style="@style/ValueType"
+                        android:text="@string/max" />
 
+                    <TextView
+                        android:id="@+id/eth_max_textView"
+                        style="@style/MinorPrice"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ValueType"
+                        android:text="@string/min" />
+
+                    <TextView
+                        android:id="@+id/eth_min_textView"
+                        style="@style/MinorPrice"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/ValueType"
+                        android:text="@string/last" />
+
+                    <TextView
+                        android:id="@+id/eth_last_textView"
+                        style="@style/MainPrice" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -137,103 +149,44 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/PairName"
-                    android:text="ETH/PLN" />
-
-                <LinearLayout
+                <ListView
+                    android:id="@+id/history_btc_listView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:alpha="0.8"
+                    android:background="@color/colorPrimaryDarkTrans"
+                    android:paddingEnd="1dp"
+                    android:paddingStart="8dp"
+                    android:scrollbarAlwaysDrawVerticalTrack="true" />
 
-                    <TextView
-                        style="@style/ValueType"
-                        android:text="max:" />
-
-                    <TextView
-                        android:id="@+id/eth_max_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.8"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/ValueType"
-                        android:text="min:" />
-
-                    <TextView
-                        android:id="@+id/eth_min_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.8"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="fill_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/ValueType"
-                        android:text="average:" />
-
-                    <TextView
-                        android:id="@+id/eth_last_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:alpha="0.9"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="@string/n_a"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                        android:textSize="48sp" />
-                </LinearLayout>
             </LinearLayout>
-
-
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@color/colorPrimary"
-            android:paddingLeft="16dp"
-            android:paddingRight="8dp">
+            android:paddingEnd="8dp"
+            android:paddingStart="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Source"
+                android:layout_alignParentEnd="true"
+                android:text="@string/source"
                 android:textStyle="italic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NBP.PL"
+                android:text="@string/nbp_pl"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -244,16 +197,11 @@
 
                 <TextView
                     style="@style/PairName"
-                    android:text="CHF/PLN (bid)" />
+                    android:text="@string/chf_pln_bid" />
 
                 <TextView
                     android:id="@+id/chf_bid_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="@string/n_a"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                    android:textSize="38sp" />
+                    style="@style/MainPrice" />
             </LinearLayout>
 
             <LinearLayout
@@ -264,82 +212,14 @@
 
                 <TextView
                     style="@style/PairName"
-                    android:text="CHF/PLN (ask)" />
+                    android:text="@string/chf_pln_ask" />
 
                 <TextView
                     android:id="@+id/chf_ask_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="@string/n_a"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"
-                    android:textSize="38sp" />
+                    style="@style/MainPrice"  />
 
             </LinearLayout>
-
         </LinearLayout>
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:alpha="0.7"-->
-        <!--android:text="CHF/PLN (bid)"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"-->
-        <!--android:textStyle="bold" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/chf_bid_textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:alpha="0.9"-->
-        <!--android:text="@string/n_a"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"-->
-        <!--android:textSize="38sp" />-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:alpha="0.7"-->
-        <!--android:text="CHF/PLN (ask)"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"-->
-        <!--android:textStyle="bold" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/chf_ask_textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:alpha="0.9"-->
-        <!--android:text="@string/n_a"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Inverse"-->
-        <!--android:textSize="38sp" />-->
-
-        <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
 
         <TextClock
             android:id="@+id/textClock"
@@ -352,27 +232,30 @@
             android:textSize="72sp" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp">
+        android:layout_height="48dp">
 
         <Button
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:alpha="0.5"
             android:onClick="bitbayNetButton"
-            android:text="bitbay\nmarket"
+            android:text="@string/bitbay_nmarket"
             android:textSize="9sp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="0dp"
-            android:layout_marginStart="0dp"
             android:alpha="0.5"
             android:onClick="bitcoinchartsButton"
-            android:text="All Markets\nbitcoincharts"
+            android:text="@string/bitcoincharts"
             android:textSize="9sp" />
 
         <TextView
@@ -383,7 +266,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_signal_wifi_off_black_24dp"
             android:gravity="center_horizontal"
-            android:text="disconnected"
+            android:text="@string/disconnected_issue"
             android:textColor="@color/colorAccent" />
 
         <LinearLayout
@@ -403,7 +286,5 @@
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>

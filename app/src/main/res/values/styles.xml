@@ -17,7 +17,7 @@
         <item name="android:paddingRight">1dp</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium.Inverse</item>
     </style>
-    
+
     <style name="ValueType" parent="universalWrapContent">
         <item name="android:alpha">0.8</item>
         <item name="android:fontFamily">sans-serif-smallcaps</item>
@@ -25,4 +25,20 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small.Inverse</item>
     </style>
 
+    <style name="MainPrice" parent="universalWrapContent">
+        <item name="android:maxLines">1</item>
+        <item name="android:alpha">0.9</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Inverse</item>
+        <item name="android:textSize">43sp</item>
+        <item name="android:text">@string/n_a</item>
+    </style>
+
+    <style name="MinorPrice" parent="universalWrapContent">
+        <item name="android:alpha">0.8</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Inverse</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:text">@string/n_a</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
 </resources>

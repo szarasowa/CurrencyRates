@@ -12,8 +12,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import ovh.szarasowa.currencyrates.MainActivity;
-
 /**
  * Created by Em on 2017-09-27.
  */
