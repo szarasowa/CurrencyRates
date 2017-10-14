@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,22 +24,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
     private static final String REQUEST_URL_BTC = "https://bitbay.net/API/Public/BTCPLN/ticker.json";
     private static final String REQUEST_URL_ETH = "https://bitbay.net/API/Public/ETHPLN/ticker.json";
     private static final String REQUEST_URL_CHF = "http://api.nbp.pl/api/exchangerates/rates/c/chf/?format=json";
-    private static final String REQUEST_URL_HISTORY_BTC = "https://bitbay.net/API/Public/BTCPLN/trades.json?since=49";
 
     static ProgressBar progressBar;
     static Animation animationAlpha;
     private final String TAG = MainActivity.class.getSimpleName();
     public SoundPool soundPool;
     public int beepSoundId;
-    public ArrayList<GraphItem> priceHistory;
     TextView btcMinView, btcMaxView, btcLastView, ethMinView, ethMaxView, ethLastView, chfAskView, chfBidView, disconnectedTextView, timerTextView;
     LinearLayout containerLayout, refreshLayout;
     CountDownTimer countDownTimer;
@@ -100,10 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 05-10b
-        priceHistory = new ArrayList<>();
-        new GetHistoryCurrency().execute();
-    }   // onCreate end
+    }   // onCreate end.
 
     // check connection.
     private boolean checkInternetConnection() {
@@ -129,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // https://developer.android.com/reference/android/os/CountDownTimer.html
     public void countTimer(long time) {
         if (isCounting) {
             countDownTimer.cancel();
@@ -302,50 +293,6 @@ public class MainActivity extends AppCompatActivity {
 
             soundPool.play(beepSoundId, 0.2f, 0.2f, 0, 0, 1);
 
-        }
-    }
-
-    private class GetHistoryCurrency extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler httpHandler = new HttpHandler();
-            String jsonString = httpHandler.makeServiceCall(REQUEST_URL_HISTORY_BTC);
-
-            Log.e(TAG, "Response from REQUEST_URL_HISTORY_BTC: " + jsonString);
-            if (jsonString != null) {
-                try {
-                    JSONArray jsonArray = new JSONArray(jsonString);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        long date = jsonObject.getLong("date");
-                        String type = jsonObject.getString("type");
-                        Integer price = jsonObject.getInt("price");
-
-                        priceHistory.add(i, (new GraphItem(type, price, date)));
-                    }
-                } catch (JSONException e) {
-                    Log.e(TAG, "(btc-history) JSONException: " + e);
-                }
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-
-            if (!priceHistory.isEmpty()) {
-                GraphAdapter graphAdapter = new GraphAdapter(MainActivity.this, priceHistory);
-                ListView btcListView = (ListView) findViewById(R.id.history_btc_listView);
-                btcListView.setAdapter(graphAdapter);
-            }
         }
     }
 }
