@@ -16,14 +16,14 @@ import java.net.URL;
  * Created by Em on 2017-09-27.
  */
 
-public class HttpHandler {
+class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
 
-    public HttpHandler() {
+    HttpHandler() {
     }
 
-    public String makeServiceCall(String reqUrl) {
+    String makeServiceCall(String reqUrl) {
         String response = null;
         MainActivity.progressBar.setProgress(15);
         try {

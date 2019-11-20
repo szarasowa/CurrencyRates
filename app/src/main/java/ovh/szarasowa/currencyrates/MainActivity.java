@@ -24,6 +24,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,40 +39,28 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
     public SoundPool soundPool;
     public int beepSoundId;
-    TextView btcMinView, btcMaxView, btcLastView, ethMinView, ethMaxView, ethLastView, chfAskView, chfBidView, disconnectedTextView, timerTextView;
-    LinearLayout containerLayout, refreshLayout;
+//    LinearLayout refreshLayout;
     CountDownTimer countDownTimer;
     boolean isCounting;
     SoundPool.Builder soundPoolBuilder;
     AudioAttributes attributes;
     AudioAttributes.Builder attributesBuilder;
 
+    // Snake of Binders
+    @BindView(R.id.btc_min_textView) TextView btcMinView;@BindView(R.id.btc_max_textView) TextView btcMaxView;@BindView(R.id.btc_last_textView) TextView btcLastView;@BindView(R.id.eth_min_textView) TextView ethMinView;@BindView(R.id.eth_max_textView) TextView ethMaxView;@BindView(R.id.eth_last_textView) TextView ethLastView;@BindView(R.id.chf_ask_textView) TextView chfAskView;@BindView(R.id.chf_bid_textView) TextView chfBidView;@BindView(R.id.disconnected_textView) TextView disconnectedTextView;@BindView(R.id.timerTextView) TextView timerTextView;
+    @BindView(R.id.container_layout) LinearLayout containerLayout; @BindView(R.id.refresh_layout) LinearLayout refreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
 
         animationAlpha = new AlphaAnimation(0.0f, 1.0f);
         animationAlpha.setDuration(400);
         animationAlpha.setRepeatCount(0);
 
-        containerLayout = (LinearLayout) findViewById(R.id.container_layout);
         refreshLayout = (LinearLayout) findViewById(R.id.refresh_layout);
-
-        btcMinView = (TextView) findViewById(R.id.btc_min_textView);
-        btcMaxView = (TextView) findViewById(R.id.btc_max_textView);
-        btcLastView = (TextView) findViewById(R.id.btc_last_textView);
-
-        ethMinView = (TextView) findViewById(R.id.eth_min_textView);
-        ethMaxView = (TextView) findViewById(R.id.eth_max_textView);
-        ethLastView = (TextView) findViewById(R.id.eth_last_textView);
-
-        chfAskView = (TextView) findViewById(R.id.chf_ask_textView);
-        chfBidView = (TextView) findViewById(R.id.chf_bid_textView);
-
-        disconnectedTextView = (TextView) findViewById(R.id.disconnected_textView);
-        timerTextView = (TextView) findViewById(R.id.timerTextView);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -141,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void bitbayNetButton(View v) {
-        String url = "https://bitbay.net/";
+        String url = "https://bitbay.net/en/exchange-rate";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
@@ -289,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
             alphaToZero.setFillAfter(true);
             progressBar.startAnimation(alphaToZero);
 
-            countTimer(300000);
+            countTimer(120000);
 
             soundPool.play(beepSoundId, 0.2f, 0.2f, 0, 0, 1);
 
